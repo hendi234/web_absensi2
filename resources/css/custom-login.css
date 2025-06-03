@@ -1,0 +1,80 @@
+body {
+    background-image: url("/public/images/gambar.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+    /* background-color: #22c55e; */
+}
+
+.fi-simple-main {
+    position: relative;
+    width: 400px;
+    max-width: 90vw;
+    min-height: 550px;
+    max-height: 550px;
+    padding: 50px;
+    background: linear-gradient(135deg, #ffffffda 80%, #4ade80d5 20%);
+    border-radius: 0 12px 12px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: auto;
+    margin-right: 310px; /* geser ke kiri */
+    z-index: 10;
+}
+
+.fi-simple-main::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: -449px;
+    transform: translateY(-50%);
+    width: 450px;
+    height: 550px;
+    border-radius: 12px 0 0 12px;
+    z-index: 0;
+    background-image: url("/public/images/icon_pt2.png"),
+        linear-gradient(135deg, #4ade80e8 30%, #f0fdf4 100%);
+    background-repeat: no-repeat, no-repeat;
+    background-position: center, center;
+    background-size: 300px auto, auto;
+    /* gradient nggak perlu diatur size, yang penting gambar saja */
+}
+
+/* Mode gelap */
+.dark .fi-simple-main {
+    background: linear-gradient(135deg, #222222e7 80%, #16a34ae7 20%);
+}
+
+/* ✅ Untuk layar laptop ukuran 1280px */
+@media (max-width: 1280px) {
+    .fi-simple-main {
+        margin-right: 200px; /* kurangin supaya gak terlalu ke kiri */
+    }
+}
+
+/* Responsive Tablet dan Laptop */
+@media (max-width: 1024px) {
+    .fi-simple-main {
+        width: 90%;
+        max-width: 380px;
+        padding: 30px 20px;
+        min-height: auto; /* Kalau ingin min-height hilang di tablet */
+        border-radius: 12px;
+        margin: auto; /* Agar posisi tetap center */
+    }
+    .fi-simple-main::before {
+        display: none;
+    }
+}
+
+/* Responsive Mobile */
+@media (max-width: 480px) {
+    .fi-simple-main {
+        width: 80%;
+        max-width: 370px;
+        padding: 20px;
+        min-height: 450px; /* Tetap tinggi agar tidak terlalu pendek */
+        margin: auto; /* Center posisi di layar kecil */
+        border-radius: 12px; /* Tambahin supaya consistent */
+    }
+}
