@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AbsenKeluar extends Model
 {
     use HasFactory;
-    protected $table = 'absen_keluars';
+    protected $table = 'attendance_out';
     protected $guarded = ['id'];
 
     public $timestamps = false;

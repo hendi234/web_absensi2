@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absen_masuks', function (Blueprint $table) {
+        Schema::create('attendance_in', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->decimal('latitude', 10, 7);
-            $table->decimal('longitude', 10, 7);
+            $table->string('latitude', 255);
+            $table->string('longitude', 255);
             $table->text('foto');
             $table->text('desc');
-            $table->timestamp('waktu_absen')->default(now());
+            $table->timestamp('time_attendance')->default(now());
         });
     }
 
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absen_masuks');
+        Schema::dropIfExists('attendance_in');
     }
 };

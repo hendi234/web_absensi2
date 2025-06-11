@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AbsensiHarian extends Model
 {
     use HasFactory;
-    protected $table = 'absensi_harians';
+    protected $table = 'daily_attendance';
     protected $guarded = ['id'];
 
      // Menyimpan siapa yang terakhir mengupdate data
@@ -74,11 +74,11 @@ class AbsensiHarian extends Model
 
     public function absenMasuk()
     {
-        return $this->belongsTo(AbsenMasuk::class, 'id_absen_masuks');
+        return $this->belongsTo(AbsenMasuk::class, 'attendace_in');
     }
 
     public function absenKeluar()
     {
-        return $this->belongsTo(AbsenKeluar::class, 'id_absen_keluars');
+        return $this->belongsTo(AbsenKeluar::class, 'attendance_out');
     }
 }

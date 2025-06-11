@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('absensi_harians', function (Blueprint $table) {
+        Schema::create('daily_attendance', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('id_absen_masuks');
-            $table->foreign('id_absen_masuks')->references('id')->on('absen_masuks')->onDelete("CASCADE")->onUpdate("CASCADE");
-            $table->unsignedBigInteger('id_absen_keluars');
-            $table->foreign('id_absen_keluars')->references('id')->on('absen_keluars')->onDelete("CASCADE")->onUpdate("CASCADE");
-            $table->time('durasi_kerja')->nullable();
+            $table->unsignedBigInteger('id_attendance_in');
+            $table->foreign('id_attendance_in')->references('id')->on('attendance_in')->onDelete("CASCADE")->onUpdate("CASCADE");
+            $table->unsignedBigInteger('id_attendance_out');
+            $table->foreign('id_attendance_out')->references('id')->on('attendance_out')->onDelete("CASCADE")->onUpdate("CASCADE");
+            $table->time('work_time')->nullable();
             $table->boolean('status')->default(false);
             $table->unsignedBigInteger('updated_by')->nullable();
             $table->timestamps();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('absensi_harians');
+        Schema::dropIfExists('daily_attendance');
     }
 };

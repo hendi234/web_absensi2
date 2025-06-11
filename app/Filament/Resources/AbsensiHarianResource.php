@@ -35,6 +35,12 @@ class AbsensiHarianResource extends Resource
 
     protected static ?string $navigationGroup = 'Manajemen Absensi';
 
+    protected static ?string $label = 'Rekap Absen Harian';
+
+    protected static ?string $pluralLabel = 'Rekap Absen Harian';    
+
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form 
@@ -72,7 +78,7 @@ class AbsensiHarianResource extends Resource
                         ->dateTime('H:i:s')
                         ->sortable(),
                     TextColumn::make('durasi_kerja')
-                        ->label('Durasi Kerja')
+                        ->label('Durasi Waktu Kerja')
                         ->sortable(),
                     TextColumn::make('lokasi_masuk')
                         ->label('Lokasi Masuk')

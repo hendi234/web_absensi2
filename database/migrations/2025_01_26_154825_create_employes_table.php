@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('employes', function (Blueprint $table) {
             $table->id();
             $table->string('nip', 16);
-            $table->string('name', 128);
+            $table->string('name', 64);
             $table->text('avatar');
-            $table->string('email', 128);
+            $table->string('email', 64);
             $table->string('position', 64);
-            $table->string('education', 128);
+            $table->string('education', 64);
             $table->date('join_date');
             $this->base($table);
         });
