@@ -56,7 +56,7 @@ class AbsenMasukResource extends Resource
                 Textarea::make('desc')
                     ->required()
                     ->columnSpanFull(),
-                Hidden::make('waktu_absen')
+                Hidden::make('attendance_time')
                     ->default(now()),
             ]);
     }
@@ -88,7 +88,7 @@ class AbsenMasukResource extends Resource
                     ->label('Tanggal')
                     ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->waktu_absen)->translatedFormat('d M Y'))
                     ->sortable(),
-                TextColumn::make('waktu_absen')
+                TextColumn::make('attendance_time')
                     ->label('Waktu')
                     ->dateTime('H:i:s')
                     ->sortable(),
@@ -153,7 +153,7 @@ class AbsenMasukResource extends Resource
                 TextEntry::make('tanggal_absen')
                     ->label('Tanggal')
                     ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->waktu_absen)->translatedFormat('d M Y')),
-                TextEntry::make('waktu_absen')
+                TextEntry::make('attendance_time')
                     ->label('Waktu')
                     ->dateTime('H:i:s'),
             ])

@@ -69,15 +69,15 @@ class AbsensiHarianResource extends Resource
                         ->label('Tanggal')
                         ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->translatedFormat('d M Y'))
                         ->sortable(),
-                    TextColumn::make('absenMasuk.waktu_absen')
+                    TextColumn::make('absenMasuk.attendance_time')
                         ->label('Waktu Masuk')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('absenKeluar.waktu_absen')
+                    TextColumn::make('absenKeluar.attendance_time')
                         ->label('Waktu Keluar')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('durasi_kerja')
+                    TextColumn::make('work_time')
                         ->label('Durasi Waktu Kerja')
                         ->sortable(),
                     TextColumn::make('lokasi_masuk')
@@ -125,15 +125,15 @@ class AbsensiHarianResource extends Resource
                         ->label('Tanggal')
                         ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->translatedFormat('d M Y'))
                         ->sortable(),                    
-                    TextColumn::make('absenMasuk.waktu_absen')
+                    TextColumn::make('absenMasuk.attendance_time')
                         ->label('Waktu Masuk')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('absenKeluar.waktu_absen')
+                    TextColumn::make('absenKeluar.attendance_time')
                         ->label('Waktu Keluar')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('durasi_kerja')
+                    TextColumn::make('work_time')
                         ->label('Durasi Kerja')
                         ->sortable(),
                     TextColumn::make('lokasi_masuk')
@@ -217,10 +217,10 @@ class AbsensiHarianResource extends Resource
                         TextEntry::make('tanggal_absen')
                             ->label('Tanggal')
                             ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->locale('id')->translatedFormat('d M Y')),
-                        TextEntry::make('absenMasuk.waktu_absen')
+                        TextEntry::make('absenMasuk.attendance_time')
                             ->label('Waktu Masuk')
                             ->dateTime('H:i:s'),
-                        TextEntry::make('absenKeluar.waktu_absen')
+                        TextEntry::make('absenKeluar.attendance_time')
                             ->label('Waktu Keluar')
                             ->dateTime('H:i:s'),
                         TextEntry::make('durasi_kerja')
