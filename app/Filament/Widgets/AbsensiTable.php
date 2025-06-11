@@ -26,13 +26,13 @@ class AbsensiTable extends BaseWidget
                   // Jika user memiliki role ID 2, hanya tampilkan data absen miliknya sendiri
                     ->when(Auth::check() && Auth::user()->id_roles == 2, function ($query) {
                         $query->where(function ($q) {
-                            $q->whereIn('id_absen_masuks', function ($subQuery) {
+                            $q->whereIn('id_attendance_in', function ($subQuery) {
                                 $subQuery->select('id')
-                                    ->from('absen_masuks')
+                                    ->from('attendance_in')
                                     ->where('user_id', Auth::id());
-                            })->orWhereIn('id_absen_keluars', function ($subQuery) {
+                            })->orWhereIn('id_attendance_out', function ($subQuery) {
                                 $subQuery->select('id')
-                                    ->from('absen_keluars')
+                                    ->from('attendance_out')
                                     ->where('user_id', Auth::id());
                             });
                         });
@@ -65,11 +65,11 @@ class AbsensiTable extends BaseWidget
                         ->label('Tanggal')
                         ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->translatedFormat('d M Y'))
                         ->sortable(),
-                    TextColumn::make('absenMasuk.waktu_absen')
+                    TextColumn::make('absenMasuk.attendance_time')
                         ->label('Waktu Masuk')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('absenKeluar.waktu_absen')
+                    TextColumn::make('absenKeluar.attendance_time')
                         ->label('Waktu Keluar')
                         ->dateTime('H:i:s')
                         ->sortable(),
@@ -121,11 +121,11 @@ class AbsensiTable extends BaseWidget
                         ->label('Tanggal')
                         ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->translatedFormat('d M Y'))
                         ->sortable(),
-                    TextColumn::make('absenMasuk.waktu_absen')
+                    TextColumn::make('absenMasuk.attendance_time')
                         ->label('Waktu Masuk')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('absenKeluar.waktu_absen')
+                    TextColumn::make('absenKeluar.attendance_time')
                         ->label('Waktu Keluar')
                         ->dateTime('H:i:s')
                         ->sortable(),

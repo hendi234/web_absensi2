@@ -67,6 +67,7 @@ class AbsenController extends Controller
         // Simpan ke database
         $absenMasuk = new AbsenMasuk();
         $absenMasuk->fill($validated);
+        dd('$absenMasuk');
         $absenMasuk->save();
 
         return redirect('/absensi/absen-masuks')->with('success', 'Absen Masuk Berhasil');

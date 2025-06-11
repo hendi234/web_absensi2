@@ -39,7 +39,7 @@ class AbsensiHarian extends Model
 
     public function user()
     {
-        return $this->hasOneThrough(User::class, AbsenMasuk::class, 'id', 'id', 'id_absen_masuks', 'user_id');
+        return $this->hasOneThrough(User::class, AbsenMasuk::class, 'id', 'id', 'id_attendance_in', 'user_id');
     }    
 
     // Method untuk get data employe
@@ -47,8 +47,8 @@ class AbsensiHarian extends Model
     {
         return Employe::select('employes.position')
             ->join('users', 'users.id_employes', '=', 'employes.id')
-            ->join('absen_masuks', 'absen_masuks.user_id', '=', 'users.id')
-            ->where('absen_masuks.id', $this->id_absen_masuks)
+            ->join('attendance_in', 'attendance_in.user_id', '=', 'users.id')
+            ->where('attendance_in.id', $this->id_attendace_in)
             ->value('position');
     }
 
@@ -57,8 +57,8 @@ class AbsensiHarian extends Model
     {
         return Employe::select('employes.nip')
             ->join('users', 'users.id_employes', '=', 'employes.id')
-            ->join('absen_masuks', 'absen_masuks.user_id', '=', 'users.id')
-            ->where('absen_masuks.id', $this->id_absen_masuks)
+            ->join('attendance_in', 'attendance_in.user_id', '=', 'users.id')
+            ->where('attendance_in.id', $this->id_attendace_in)
             ->value('nip');
     }
 
@@ -74,11 +74,11 @@ class AbsensiHarian extends Model
 
     public function absenMasuk()
     {
-        return $this->belongsTo(AbsenMasuk::class, 'attendace_in');
+        return $this->belongsTo(AbsenMasuk::class, 'id_attendance_in');
     }
 
     public function absenKeluar()
     {
-        return $this->belongsTo(AbsenKeluar::class, 'attendance_out');
+        return $this->belongsTo(AbsenKeluar::class, 'id_attendance_out');
     }
 }
