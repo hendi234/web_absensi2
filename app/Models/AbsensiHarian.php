@@ -48,7 +48,7 @@ class AbsensiHarian extends Model
         return Employe::select('employes.position')
             ->join('users', 'users.id_employes', '=', 'employes.id')
             ->join('attendance_in', 'attendance_in.user_id', '=', 'users.id')
-            ->where('attendance_in.id', $this->id_attendace_in)
+            ->where('attendance_in.id', $this->id_attendance_in)
             ->value('position');
     }
 
@@ -58,7 +58,7 @@ class AbsensiHarian extends Model
         return Employe::select('employes.nip')
             ->join('users', 'users.id_employes', '=', 'employes.id')
             ->join('attendance_in', 'attendance_in.user_id', '=', 'users.id')
-            ->where('attendance_in.id', $this->id_attendace_in)
+            ->where('attendance_in.id', $this->id_attendance_in)
             ->value('nip');
     }
 

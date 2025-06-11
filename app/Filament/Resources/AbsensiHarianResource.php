@@ -294,13 +294,13 @@ class AbsensiHarianResource extends Resource
         return parent::getEloquentQuery()->withoutGlobalScopes([SoftDeletingScope::class])
             ->when(Auth::check() && Auth::user()->id_roles == 2, function ($query) {
                 $query->where(function ($q) {
-                $q->whereIn('id_absen_masuks', function ($subQuery) {
+                $q->whereIn('id_attendance_in', function ($subQuery) {
                     $subQuery->select('id')
-                        ->from('absen_masuks')
+                        ->from('attendance_in')
                         ->where('user_id', Auth::id());
-                })->orWhereIn('id_absen_keluars', function ($subQuery) {
+                })->orWhereIn('id_attendance_out', function ($subQuery) {
                     $subQuery->select('id')
-                        ->from('absen_keluars')
+                        ->from('attendance_out')
                         ->where('user_id', Auth::id());
                 });
             });

@@ -38,7 +38,7 @@ class AbsenMasukResource extends Resource
     {
         return $form
             ->schema([
-                Hidden::make('user_id-')
+                Hidden::make('user_id')
                     ->default(Auth::id()),
                 TextInput::make('latitude')
                     ->label('Latitude')
