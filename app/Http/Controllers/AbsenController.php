@@ -37,7 +37,7 @@ class AbsenController extends Controller
             'longitude' => 'required|numeric',
             'foto' => 'required|string',
             'desc' => 'required|string|max:255',
-            'waktu_absen' => 'required|date',
+            'time_attendance' => 'required|date',
         ], [
             'latitude.required' => 'Lokasi wajib di isi.',
             'longitude.required' => 'Lokasi wajib di isi.',
@@ -52,7 +52,7 @@ class AbsenController extends Controller
 
         // Cek apakah user sudah absen masuk hari ini
         $existingAbsen = AbsenMasuk::where('user_id', $userId)
-        ->whereDate('waktu_absen', $today)
+        ->whereDate('time_attendance', $today)
         ->exists();
 
         if ($existingAbsen) {
@@ -62,7 +62,7 @@ class AbsenController extends Controller
         $validated['foto'] = $this->processImage($validated['foto']);
 
         // Set waktu absen
-        $validated['waktu_absen'] = Carbon::now()->locale('id');
+        $validated['time_attendance'] = Carbon::now()->locale('id');
 
         // Simpan ke database
         $absenMasuk = new AbsenMasuk();
@@ -91,7 +91,7 @@ class AbsenController extends Controller
 
         // Cek apakah user sudah memiliki absen masuk hari ini
         $absenMasuk = AbsenMasuk::where('user_id', $request->user_id)
-            ->whereDate('waktu_absen', now()->toDateString())
+            ->whereDate('time_attendance', now()->toDateString())
             ->first();
 
         if (!$absenMasuk) {
@@ -103,7 +103,7 @@ class AbsenController extends Controller
 
         // Cek apakah user sudah absen keluar hari ini
         $existingAbsenKeluar = AbsenKeluar::where('user_id', $userId)
-            ->whereDate('waktu_absen', $today)
+            ->whereDate('time_attendance', $today)
             ->exists();
 
         if ($existingAbsenKeluar) {
@@ -112,34 +112,34 @@ class AbsenController extends Controller
 
         // Proses gambar
         $validated['foto'] = $this->processImage($validated['foto']);
-        $validated['waktu_absen'] = now();
+        $validated['time_attendance'] = now();
 
         // Simpan Absen Keluar
         $absenKeluar = AbsenKeluar::create($validated);
             
         if ($absenMasuk) {
             // Hitung Durasi Kerja
-            $masukTime = Carbon::parse($absenMasuk->waktu_absen);
-            $keluarTime = Carbon::parse($validated['waktu_absen']);
+            $masukTime = Carbon::parse($absenMasuk->time_attendance);
+            $keluarTime = Carbon::parse($validated['time_attendance']);
             $durasiKerja = $keluarTime->diff($masukTime)->format('%H:%I:%S');
 
             // Cek apakah sudah ada AbsensiHarian untuk user ini hari ini
-            $absensiHarian = AbsensiHarian::where('id_absen_masuks', $absenMasuk->id)->first();
+            $absensiHarian = AbsensiHarian::where('id_attendance_in', $absenMasuk->id)->first();
 
             if ($absensiHarian) {
                 // Jika sudah ada, update data keluar & durasi
                 $absensiHarian->update([
-                    'id_absen_keluars' => $absenKeluar->id,
-                    'durasi_kerja' => $durasiKerja,
+                    'id_attendance_out' => $absenKeluar->id,
+                    'work_time' => $durasiKerja,
                     'status' => 0,
                 ]);
             } else {
                 // Jika belum ada, buat baru
                 AbsensiHarian::create([
                     'tanggal' => now()->toDateString(),
-                    'id_absen_masuks' => $absenMasuk->id,
-                    'id_absen_keluars' => $absenKeluar->id,
-                    'durasi_kerja' => $durasiKerja,
+                    'id_attendance_in' => $absenMasuk->id,
+                    'id_attendance_out' => $absenKeluar->id,
+                    'work_time' => $durasiKerja,
                     'status' => 0,
                     'updated_by' => null
                 ]);
