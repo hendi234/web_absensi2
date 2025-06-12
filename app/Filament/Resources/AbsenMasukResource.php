@@ -56,7 +56,7 @@ class AbsenMasukResource extends Resource
                 Textarea::make('desc')
                     ->required()
                     ->columnSpanFull(),
-                Hidden::make('attendance_time')
+                Hidden::make('time_attendance')
                     ->default(now()),
             ]);
     }
@@ -86,9 +86,9 @@ class AbsenMasukResource extends Resource
                     ->label('Keterangan'),
                 TextColumn::make('tanggal_absen')
                     ->label('Tanggal')
-                    ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->waktu_absen)->translatedFormat('d M Y'))
+                    ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->time_attendance)->translatedFormat('d M Y'))
                     ->sortable(),
-                TextColumn::make('attendance_time')
+                TextColumn::make('time_attendance')
                     ->label('Waktu')
                     ->dateTime('H:i:s')
                     ->sortable(),
@@ -102,10 +102,10 @@ class AbsenMasukResource extends Resource
                 ->query(function (Builder $query, array $data) {
                     return $query
                         ->when($data['from'] ?? null, fn ($query) => 
-                            $query->whereDate('waktu_absen', '>=', $data['from'])
+                            $query->whereDate('time_attendance', '>=', $data['from'])
                         )
                         ->when($data['to'] ?? null, fn ($query) => 
-                            $query->whereDate('waktu_absen', '<=', $data['to'])
+                            $query->whereDate('time_attendance', '<=', $data['to'])
                         );
                 }),
             ])
@@ -152,8 +152,8 @@ class AbsenMasukResource extends Resource
                     ->label('Keterangan'),
                 TextEntry::make('tanggal_absen')
                     ->label('Tanggal')
-                    ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->waktu_absen)->translatedFormat('d M Y')),
-                TextEntry::make('attendance_time')
+                    ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->time_attendance)->translatedFormat('d M Y')),
+                TextEntry::make('time_attendance')
                     ->label('Waktu')
                     ->dateTime('H:i:s'),
             ])

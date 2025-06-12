@@ -81,8 +81,8 @@
             @enderror
 
             <!-- Input Data Waktu Absen -->
-            <input type="hidden" name="attendance_time" id="attendance_time" value="{{ \Carbon\Carbon::now()->locale('id') }}">
-            @error('attendance_time')
+            <input type="hidden" name="time_attendance" id="time_attendance" value="{{ \Carbon\Carbon::now()->locale('id') }}">
+            @error('time_attendance')
                 <div class="text-red-500 text-sm">{{ $message }}</div>
             @enderror
         

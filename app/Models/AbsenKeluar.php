@@ -8,8 +8,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class AbsenKeluar extends Model
 {
     use HasFactory;
+
     protected $table = 'attendance_out';
-    protected $guarded = ['id'];
+    
+    protected $fillable = [
+        'user_id',
+        'latitude',
+        'longitude',
+        'foto',
+        'desc',
+        'time_attendance',
+    ];
 
     public $timestamps = false;
 

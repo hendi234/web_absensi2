@@ -39,13 +39,21 @@ class AbsenController extends Controller
             'desc' => 'required|string|max:255',
             'time_attendance' => 'required|date',
         ], [
-            'latitude.required' => 'Lokasi wajib di isi.',
-            'longitude.required' => 'Lokasi wajib di isi.',
+            'user_id.required' => 'ID pengguna wajib diisi.',
+            'user_id.exists' => 'ID pengguna tidak ditemukan.',
+        
+            'latitude.required' => 'Latitude (lokasi) wajib diisi.',
+            'longitude.required' => 'Longitude (lokasi) wajib diisi.',
+        
             'foto.required' => 'Foto wajib diunggah.',
-            'foto.image' => 'File harus berupa gambar.',
-            'foto.mimes' => 'Format gambar harus jpeg, png, atau jpg.',
-            'foto.max' => 'Ukuran gambar maksimal 2MB.'
+        
+            'desc.required' => 'Deskripsi wajib diisi.',
+            'desc.max' => 'Deskripsi tidak boleh lebih dari 255 karakter.',
+        
+            'time_attendance.required' => 'Waktu absen wajib diisi.',
+            'time_attendance.date' => 'Format waktu absen tidak valid.',
         ]);
+        
 
         $userId = $validated['user_id'];
         $today = Carbon::today();
@@ -67,7 +75,6 @@ class AbsenController extends Controller
         // Simpan ke database
         $absenMasuk = new AbsenMasuk();
         $absenMasuk->fill($validated);
-        dd('$absenMasuk');
         $absenMasuk->save();
 
         return redirect('/absensi/absen-masuks')->with('success', 'Absen Masuk Berhasil');

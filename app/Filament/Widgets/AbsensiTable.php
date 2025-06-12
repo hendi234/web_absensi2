@@ -65,11 +65,11 @@ class AbsensiTable extends BaseWidget
                         ->label('Tanggal')
                         ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->translatedFormat('d M Y'))
                         ->sortable(),
-                    TextColumn::make('absenMasuk.attendance_time')
+                    TextColumn::make('absenMasuk.time_attendance')
                         ->label('Waktu Masuk')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('absenKeluar.attendance_time')
+                    TextColumn::make('absenKeluar.time_attendance')
                         ->label('Waktu Keluar')
                         ->dateTime('H:i:s')
                         ->sortable(),
@@ -121,15 +121,15 @@ class AbsensiTable extends BaseWidget
                         ->label('Tanggal')
                         ->getStateUsing(fn ($record) => \Carbon\Carbon::parse($record->created_at)->translatedFormat('d M Y'))
                         ->sortable(),
-                    TextColumn::make('absenMasuk.attendance_time')
+                    TextColumn::make('absenMasuk.time_attendance')
                         ->label('Waktu Masuk')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('absenKeluar.attendance_time')
+                    TextColumn::make('absenKeluar.time_attendance')
                         ->label('Waktu Keluar')
                         ->dateTime('H:i:s')
                         ->sortable(),
-                    TextColumn::make('durasi_kerja')
+                    TextColumn::make('work_time')
                         ->label('Durasi Kerja')
                         ->sortable(),
                     TextColumn::make('lokasi_masuk')

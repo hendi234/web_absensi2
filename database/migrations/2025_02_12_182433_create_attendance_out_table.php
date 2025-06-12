@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('latitude', 255);
             $table->string('longitude', 255);
             $table->text('foto');
-            $table->timestamp('time_attecdance')->default(now());
+            $table->timestamp('time_attendance')->default(now());
         });
     }
 
