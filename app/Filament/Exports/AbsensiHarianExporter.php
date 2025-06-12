@@ -22,17 +22,17 @@ class AbsensiHarianExporter extends Exporter
                 ->label('Nama Karyawan'),
             ExportColumn::make('position')
                 ->label('Jabatan'),
-            ExportColumn::make('waktu_absen')
+            ExportColumn::make('time_attendance')
                 ->label('Tanggal Absen')
                 ->getStateUsing(fn ($record) => $record->created_at ? Carbon::parse($record->created_at)->translatedFormat('d M Y') : '-'),
-            ExportColumn::make('absenMasuk.waktu_absen')
+            ExportColumn::make('absenMasuk.time_attendance')
                 ->label('Waktu Masuk')
-                ->getStateUsing(fn ($record) => $record->absenMasuk?->waktu_absen ? Carbon::parse($record->absenMasuk->waktu_absen)->format('H:i:s') : '-'),
-            ExportColumn::make('absenKeluar.waktu_absen')
+                ->getStateUsing(fn ($record) => $record->absenMasuk?->time_attendance ? Carbon::parse($record->absenMasuk->time_attendance)->format('H:i:s') : '-'),
+            ExportColumn::make('absenKeluar.time_attendance')
                 ->label('Waktu Keluar')
-                ->getStateUsing(fn ($record) => $record->absenKeluar?->waktu_absen ? Carbon::parse($record->absenKeluar->waktu_absen)->format('H:i:s') : '-'),
-            ExportColumn::make('durasi_kerja')
-                ->label('Durasi Kerja'),
+                ->getStateUsing(fn ($record) => $record->absenKeluar?->time_attendance ? Carbon::parse($record->absenKeluar->time_attendance)->format('H:i:s') : '-'),
+            ExportColumn::make('work_time')
+                ->label('Durasi Waktu Kerja'),
             ExportColumn::make('absenMasuk.desc')
                 ->label('Keterangan'),
             ExportColumn::make('lokasi_masuk')

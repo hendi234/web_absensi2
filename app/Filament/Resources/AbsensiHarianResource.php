@@ -224,7 +224,7 @@ class AbsensiHarianResource extends Resource
                             ->label('Waktu Keluar')
                             ->dateTime('H:i:s'),
                         TextEntry::make('work_time')
-                            ->label('Durasi Kerja'),
+                            ->label('Durasi Waktu Kerja'),
                         TextEntry::make('absenMasuk.desc')
                             ->label('Keterangan'),
                     ]),

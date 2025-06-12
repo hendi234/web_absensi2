@@ -31,16 +31,31 @@
         <h2 class="text-lg">{{ \Carbon\Carbon::now()->locale('id')->translatedFormat('l, d F Y') }}</h2>
     </div>
 
-    @if ($errors->any())
-    <div class="bg-red-100 text-red-700 p-4 rounded-md m-4">
-        <strong>Ada kesalahan:</strong>
-        <ul class="list-disc list-inside">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
+  
+    <!-- Pesan Success atau Error -->
+    @if (session('success'))
+        <div class="bg-green-100 text-green-800 p-4 rounded-md max-w-[380px] mx-auto mt-4 text-center border border-green-300">
+            {{ session('success') }}
+        </div>
     @endif
+
+    @if (session('error'))
+        <div class="bg-red-100 text-red-800 p-4 rounded-md max-w-[380px] mx-auto mt-4 text-center border border-red-300">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    @if ($errors->any())
+        <div class="bg-red-100 text-red-700 p-4 rounded-md m-4">
+            <strong>Ada kesalahan:</strong>
+            <ul class="list-disc list-inside">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 
     <!-- Form Absen -->
     <form action="{{ route('absenmasuk.absenMasuk') }}" method="POST" enctype="multipart/form-data">
@@ -93,8 +108,6 @@
             navigator.geolocation.getCurrentPosition(function(position) {
                 document.getElementById('latitude').value = position.coords.latitude;
                 document.getElementById('longitude').value = position.coords.longitude;
-
-                   // Tampilkan pesan sukses
                 let notif = document.getElementById('notification');
                 notif.innerText = `✅ Data Lokasi berhasil diambil`;
                 notif.classList.remove('hidden', 'bg-red-500');

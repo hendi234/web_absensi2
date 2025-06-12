@@ -4,20 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 class AbsenMasuk extends Model
 {
     use HasFactory;
-
     protected $table = 'attendance_in';
-
-    protected $fillable = [
-        'user_id',
-        'latitude',
-        'longitude',
-        'foto',
-        'desc',
-        'time_attendance',
-    ];
+    protected $guarded = ['id'];
 
     public $timestamps = false;
 
