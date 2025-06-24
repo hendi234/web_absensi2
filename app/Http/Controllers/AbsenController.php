@@ -42,13 +42,13 @@ class AbsenController extends Controller
             'user_id.required' => 'ID pengguna wajib diisi.',
             'user_id.exists' => 'ID pengguna tidak ditemukan.',
         
-            'latitude.required' => 'Latitude (lokasi) wajib diisi.',
-            'longitude.required' => 'Longitude (lokasi) wajib diisi.',
+            'latitude.required' => 'lokasi wajib diisi.',
+            'longitude.required' => 'lokasi wajib diisi.',
         
             'foto.required' => 'Foto wajib diunggah.',
         
-            'desc.required' => 'Deskripsi wajib diisi.',
-            'desc.max' => 'Deskripsi tidak boleh lebih dari 255 karakter.',
+            'desc.required' => 'Keterangan wajib diisi.',
+            'desc.max' => 'Keterangan tidak boleh lebih dari 255 karakter.',
         
             'time_attendance.required' => 'Waktu absen wajib diisi.',
             'time_attendance.date' => 'Format waktu absen tidak valid.',

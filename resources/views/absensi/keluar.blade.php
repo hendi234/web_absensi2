@@ -34,12 +34,29 @@
             <h2 class="text-lg">{{ \Carbon\Carbon::now()->locale('id')->translatedFormat('l, d F Y') }}</h2>
         </div>
 
-        <!-- Notifikasi Error -->
-        @if(session('error'))
-            <div class="bg-red-500 text-white p-4 rounded-md text-center mb-4">
-                {{ session('error') }}
-            </div>
-        @endif
+         <!-- Pesan Success atau Error -->
+    @if (session('success'))
+    <div class="bg-green-100 text-green-800 p-4 rounded-md max-w-[380px] mx-auto mt-4 text-center border border-green-300">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if (session('error'))
+    <div class="bg-red-100 text-red-800 p-4 rounded-md max-w-[380px] mx-auto mt-4 text-center border border-red-300">
+        {{ session('error') }}
+    </div>
+@endif
+
+@if ($errors->any())
+    <div class="bg-red-100 text-red-700 p-4 rounded-md m-4">
+        <strong>Ada kesalahan:</strong>
+        <ul class="list-disc list-inside">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
 
         <!-- Form Absen -->
         <form action="{{ route('absenkeluar.absenKeluar') }}" method="POST" enctype="multipart/form-data">
