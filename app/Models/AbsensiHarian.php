@@ -25,6 +25,19 @@ class AbsensiHarian extends Model
         });
     }
 
+    // Event deleting untuk menghapus relasi otomatis
+    protected static function booted()
+    {
+        static::deleting(function ($absensi) {
+            if ($absensi->absenMasuk) {
+                $absensi->absenMasuk->delete();
+            }
+            if ($absensi->absenKeluar) {
+                $absensi->absenKeluar->delete();
+            }
+        });
+    }
+
     // Relasi ke User
     public function updatedBy(): BelongsTo
     {

@@ -42,6 +42,11 @@ class EmployeResource extends Resource
                 TextInput::make('nip')
                     ->required()
                     ->maxLength(16)
+                    ->unique(ignoreRecord: true)
+                    ->validationMessages([
+                        'unique' => 'NIP sudah digunakan oleh akun lain.',
+                    ])
+                    ->dehydrated(true)
                     ->columnSpanFull(),
                 TextInput::make('name')
                     ->required()

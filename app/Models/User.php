@@ -70,6 +70,6 @@ class User extends Authenticatable implements HasAvatar
 
     public function isAdmin()
     {
-        return $this->id_roles == 1;
+        return in_array($this->id_roles, [1]);
     }
 }

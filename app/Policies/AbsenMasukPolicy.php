@@ -13,7 +13,8 @@ class AbsenMasukPolicy
      */
     public function viewAny(User $user): bool
     {
-        return in_array($user->id_roles, [1, 2]); // Admin (1) dan User (2) bisa melihat semua data
+        return true;
+        // return in_array($user->id_roles, [1, 2]); // Admin (1) dan User (2) bisa melihat semua data
     }
 
     /**
@@ -21,7 +22,8 @@ class AbsenMasukPolicy
      */
     public function view(User $user, AbsenMasuk $absenMasuk): bool
     {
-        return in_array($user->id_roles, [1, 2]); // Admin dan User bisa melihat satu data
+        return true;
+        // return in_array($user->id_roles, [1, 2]); // Admin (1) dan User (2) bisa melihat semua data
     }
 
     /**

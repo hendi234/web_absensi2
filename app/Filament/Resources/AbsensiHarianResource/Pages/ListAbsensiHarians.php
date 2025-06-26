@@ -21,7 +21,7 @@ class ListAbsensiHarians extends ListRecords
         ];
 
         // Hanya tampilkan tombol Export jika id_roles bukan 2
-        if ($user->id_roles !== 2) {
+        if ($user->id_roles == 1) {
             $actions[] = ExportAction::make()
                 ->exporter(AbsensiHarianExporter::class)
                 ->label('Export Data')
