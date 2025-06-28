@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('attendance_out', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->string('latitude', 255);
-            $table->string('longitude', 255);
+            $table->string('latitude', 20);
+            $table->string('longitude', 20);
             $table->text('foto');
             $table->timestamp('time_attendance')->default(now());
         });

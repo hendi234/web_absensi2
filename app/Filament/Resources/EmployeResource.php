@@ -38,8 +38,11 @@ class EmployeResource extends Resource
                     ->disk('karyawan')
                     ->image()
                     ->label('Foto')
+                    ->validationMessages([
+                        'required' => 'Foto wajib diisi.',
+                    ])
                     ->columnSpanFull(),
-                TextInput::make('nip')
+                    TextInput::make('nip')
                     ->required()
                     ->maxLength(16)
                     ->unique(ignoreRecord: true)
@@ -47,19 +50,27 @@ class EmployeResource extends Resource
                         'unique' => 'NIP sudah digunakan oleh akun lain.',
                     ])
                     ->dehydrated(true)
-                    ->columnSpanFull(),
+                    ->columnSpanFull(),                
                 TextInput::make('name')
                     ->required()
                     ->label('Nama')
-                    ->maxLength(128),
+                    ->maxLength(64),
                 TextInput::make('position')
                     ->required()
                     ->label('Jabatan')
                     ->maxLength(64),
                 TextInput::make('email')
+                    ->label('Email')
                     ->email()
                     ->required()
-                    ->maxLength(128),
+                    ->maxLength(64)
+                    ->unique(ignoreRecord: true)
+                    ->dehydrated(true) // tetap mengirimkan value meskipun disabled
+                    ->validationMessages([
+                        'unique' => 'Email sudah digunakan.',
+                        'required' => 'Email wajib diisi.',
+                        'max' => 'Email tidak boleh lebih dari 64 karakter.',
+                    ]),  
                 DatePicker::make('join_date')
                     ->required()
                     ->label('Tanggal Bergabung')
@@ -67,7 +78,7 @@ class EmployeResource extends Resource
                 TextInput::make('education')
                     ->label('Pendidikan')
                     ->required()
-                    ->maxLength(128)
+                    ->maxLength(64)
                     ->columnSpanFull(),
             ]);
     }

@@ -62,7 +62,7 @@ class UserResource extends Resource
                 TextInput::make('name')
                     ->required()
                     ->label('Nama')
-                    ->maxLength(255)
+                    ->maxLength(64)
                     ->columnSpanFull()
                     ->disabled()  // ini bikin field read-only (disabled)
                     ->dehydrated(true),
@@ -78,13 +78,14 @@ class UserResource extends Resource
                 TextInput::make('email')
                     ->email()
                     ->required()
-                    ->maxLength(255)
+                    ->maxLength(64)
                     ->disabled()  // ini bikin field read-only (disabled)
                     ->dehydrated(true),
                 DateTimePicker::make('email_verified_at')
                     ->hidden(),
                 TextInput::make('password')
                     ->password()
+                    ->minLength(8) // ⬅️ minimal 8 karakter
                     ->dehydrated(fn ($state) => filled($state))
                     ->required(fn (string $context): bool => $context === 'create')
                     ->revealable()
