@@ -45,11 +45,6 @@ class EmployeResource extends Resource
                     TextInput::make('nip')
                     ->required()
                     ->maxLength(16)
-                    ->unique(ignoreRecord: true)
-                    ->validationMessages([
-                        'unique' => 'NIP sudah digunakan oleh akun lain.',
-                    ])
-                    ->dehydrated(true)
                     ->columnSpanFull(),                
                 TextInput::make('name')
                     ->required()
@@ -63,14 +58,7 @@ class EmployeResource extends Resource
                     ->label('Email')
                     ->email()
                     ->required()
-                    ->maxLength(64)
-                    ->unique(ignoreRecord: true)
-                    ->dehydrated(true) // tetap mengirimkan value meskipun disabled
-                    ->validationMessages([
-                        'unique' => 'Email sudah digunakan.',
-                        'required' => 'Email wajib diisi.',
-                        'max' => 'Email tidak boleh lebih dari 64 karakter.',
-                    ]),  
+                    ->maxLength(64),
                 DatePicker::make('join_date')
                     ->required()
                     ->label('Tanggal Bergabung')
